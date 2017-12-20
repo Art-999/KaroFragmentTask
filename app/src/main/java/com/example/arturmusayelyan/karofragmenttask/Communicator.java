@@ -6,4 +6,6 @@ package com.example.arturmusayelyan.karofragmenttask;
 
 public interface Communicator {
     public void respond(String data);
+
+    public void checkLongClick(boolean checkButtonClickType);
 }

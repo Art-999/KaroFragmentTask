@@ -8,7 +8,9 @@
     <Button
         android:id="@+id/plus_button"
         android:layout_centerInParent="true"
-        android:text="plus"
+        android:text="Click me"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:textSize="23sp"
         android:background="#ffff"
         android:layout_width="wrap_content"

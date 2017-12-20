@@ -7,13 +7,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 /**
  * Created by artur.musayelyan on 19/12/2017.
  */
 
 public class FragmentForEdit extends Fragment implements View.OnClickListener {
-    Communicator communicator;
+
+    private Communicator communicator;
+    private EditText sendEditText;
+    private Button sendButton;
+
     public FragmentForEdit() {
 
     }
@@ -21,7 +27,7 @@ public class FragmentForEdit extends Fragment implements View.OnClickListener {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        communicator=(Communicator)context;
+        communicator = (Communicator) context;
     }
 
     public static FragmentForEdit newInstance() {
@@ -34,14 +40,25 @@ public class FragmentForEdit extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.edit_for_fragment, container, false);
+        View view = inflater.inflate(R.layout.edit_for_fragment, container, false);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        sendEditText = view.findViewById(R.id.send_edit_text);
+        sendButton = view.findViewById(R.id.send_button);
+        sendButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.send_button:
-communicator.respond("button was clicked");
+                String data = sendEditText.getText().toString();
+                communicator.respond(data);
+                sendEditText.setText("");
                 break;
         }
     }
