@@ -28,6 +28,19 @@ public class FragmentFirst extends Fragment implements View.OnClickListener, Vie
         return fragment;
     }
 
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState == null) {
+            clickMeButtonCount =0;
+        }
+        else {
+            clickMeButtonCount=savedInstanceState.getInt("counter");
+
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -35,9 +48,14 @@ public class FragmentFirst extends Fragment implements View.OnClickListener, Vie
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("counter", clickMeButtonCount);
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         //communicator = (Communicator) getActivity();
         clickMeButton = getActivity().findViewById(R.id.plus_button);
         clickMeButton.setOnClickListener(this);

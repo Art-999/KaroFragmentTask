@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 public class FragmentSecond extends Fragment {
     private TextView textView;
+    private String showData;
 
     public FragmentSecond() {
 
@@ -26,6 +27,17 @@ public class FragmentSecond extends Fragment {
         return fragment;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(savedInstanceState==null){
+           showData=0+"";
+        }
+        else {
+            showData=savedInstanceState.getString("counter");
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,9 +48,17 @@ public class FragmentSecond extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         textView = getActivity().findViewById(R.id.text_view);
+        textView.setText(showData);
     }
 
     public void changeText(String data) {
-        textView.setText(data);
+        showData=data;
+        textView.setText(showData);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("counter",textView.getText().toString());
     }
 }
